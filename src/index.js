@@ -1,15 +1,14 @@
 import RubyGemsApi from './modules/RubyGemsApi.js';
-import GemTemplate from './templates/gem.tpl.js';
+import Gem from './modules/Gem.js';
 import LoadingTemplate from './templates/loading.tpl.js';
-import { getFaves, save, unsave, isSaved } from './helpers/save.js';
-import { unescapeHtml } from './helpers/html.js';
+import { getFaves } from './helpers/save.js';
 import { setUrlParams, getUrlParam } from './helpers/url.js';
-
-let api = new RubyGemsApi();
 
 function doSearch(query) {
     clearGemList();
     document.body.children.results.appendChild(LoadingTemplate());
+
+    let api = new RubyGemsApi();
 
     api.search(query).then((gems) => {
 
@@ -27,9 +26,8 @@ function clearGemList(gems) {
 
 function populateGemList(gems) {
     return gems.forEach((gem) => {
-        let gemElement = GemTemplate(gem);
+        let gemElement = new Gem(gem);
         document.body.children.results.appendChild(gemElement);
-        addGemEventListeners(gemElement);
     });
 }
 
@@ -66,25 +64,4 @@ function showFaves() {
     let faves = getFaves();
 
     populateGemList(faves);
-}
-
-function addGemEventListeners(gemElement) {
-    gemElement.querySelector('[data-saved]').addEventListener('click', (event) => {
-        event.preventDefault();
-
-        let button = event.target;
-        let buttonText = button.querySelector('.text');
-        let saved = !JSON.parse(event.target.dataset.saved);
-
-        button.dataset.saved = saved;
-        buttonText.innerHTML = saved ? 'Saved' : 'Save';
-
-        if (saved) {
-            save(JSON.parse(unescapeHtml(button.dataset.gemJson)));
-        } else {
-            unsave(JSON.parse(unescapeHtml(button.dataset.gemJson)).name);
-        }
-
-        return false;
-    });
 }
