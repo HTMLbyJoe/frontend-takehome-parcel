@@ -1,0 +1,112 @@
+
+.loading-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.loading {
+    font-size: 60px;
+    text-align: center;
+
+    .dot-1,
+    .dot-2,
+    .dot-3 {
+        display: inline-block;
+
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+
+    .dot-1 {
+        animation-name: dot-jump-1;
+    }
+
+    .dot-2 {
+        animation-name: dot-jump-2;
+    }
+
+    .dot-3 {
+        animation-name: dot-jump-3;
+    }
+}
+
+@keyframes dot-jump-1 {
+    0% {
+        transform: translateY(0);
+    }
+
+    20% {
+        transform: translateY(-1rem);
+    }
+
+    40% {
+        transform: translateY(0);
+    }
+
+    60% {
+        transform: translateY(0);
+    }
+
+    80% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes dot-jump-2 {
+    0% {
+        transform: translateY(0);
+    }
+
+    20% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-1rem);
+    }
+
+    60% {
+        transform: translateY(0);
+    }
+
+    80% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes dot-jump-3 {
+    0% {
+        transform: translateY(0);
+    }
+
+    20% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(0);
+    }
+
+    60% {
+        transform: translateY(-1rem);
+    }
+
+    80% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

@@ -1,11 +1,18 @@
 <!doctype html>
 <html>
 <head>
-  <title>Ruby Gems search app</title>
-  <link rel="stylesheet" href="./src/base.css" />
-  <script src="./src/index.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Find-a-Gem™ by Joe Anzalone 💎</title>
+    <link rel="stylesheet" href="./src/css/index.scss">
 </head>
 <body>
-  <h1 class="big-lorem-ipsum">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor...</h1>
+    <form id="search" action="">
+        <input type="text" class="search" name="query" placeholder="Type your query here" autofocus>
+    </form>
+
+    <div id="results"></div>
+
+    <script src="./src/index.js"></script>
 </body>
 </html>

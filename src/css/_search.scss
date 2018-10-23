@@ -1,0 +1,40 @@
+.search {
+    display: block;
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 0.75rem;
+}
+
+#results {
+    height: 100%;
+    margin: 2rem 0;
+
+    .gem {
+        background: rgba(0, 0, 0, 0.20);
+        padding: 1rem;
+        margin: 1rem 0;
+
+        .name {
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+            margin: 0;
+
+            a {
+                color: initial;
+                text-decoration: none;
+
+                &:hover,
+                &:focus {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .authors {
+            opacity: 0.7;
+            font-size: 0.75rem;
+        }
+    }
+
+}
