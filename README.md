@@ -1,6 +1,7 @@
 # Find-a-Gem™ by Joe Anzalone
 ## To-Do
 * [ ] Pagination
+* [ ] Fix the back button
 * [ ] Add more comments and docblocks
 * [ ] Add "Your Saved Faves" header to Faves List
 * [ ] Add empty states for when user has no faves, or no search results
