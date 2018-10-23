@@ -1,3 +1,15 @@
+# Find-a-Gem™ by Joe Anzalone
+## To-Do
+* [ ] Pagination
+* [ ] Add more comments and docblocks
+* [ ] Add "Your Saved Faves" header to Faves List
+* [ ] Add empty states for when user has no faves, or no search results
+* [ ] Write tests
+
+--------------------------------------------------
+ The original readme continues below...
+--------------------------------------------------
+
 # Teachable frontend takehome
 
 If you're reading this, you're likely a candidate for a frontend job at Teachable. You're going to be building a search application that takes a user's search query, hits the [Ruby Gems](https://rubygems.org/) search API endpoint, and displays the results in a list view with some added functionality (detailed below).
