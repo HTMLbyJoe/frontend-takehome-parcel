@@ -1,6 +1,8 @@
 import RubyGemsApi from './modules/RubyGemsApi.js';
 import GemTemplate from './templates/gem.tpl.js';
 import LoadingTemplate from './templates/loading.tpl.js';
+import { save, unsave, isSaved } from './helpers/save.js';
+import { unescapeHtml } from './helpers/html.js';
 
 let api = new RubyGemsApi();
 
@@ -54,6 +56,12 @@ function addGemEventListeners(gemElement) {
 
         button.dataset.saved = saved;
         buttonText.innerHTML = saved ? 'Saved' : 'Save';
+
+        if (saved) {
+            save(JSON.parse(unescapeHtml(button.dataset.gemJson)));
+        } else {
+            unsave(JSON.parse(unescapeHtml(button.dataset.gemJson)).name);
+        }
 
         return false;
     });
