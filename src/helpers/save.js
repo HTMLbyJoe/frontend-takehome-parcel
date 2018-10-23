@@ -1,4 +1,4 @@
-function getFaves() {
+export function getFaves() {
     return JSON.parse(localStorage.getItem('faves')) || [];
 }
 

@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+button {
+    display: block;
+    background: var(--body-bg);
+    color: var(--body-color);
+    border: 0.2rem solid;
+    border-spacing: 0;
+    cursor: pointer;
+    color: initial;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0.3rem 0.5rem;
+}

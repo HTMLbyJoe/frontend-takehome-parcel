@@ -1,42 +1,45 @@
 import RubyGemsApi from './modules/RubyGemsApi.js';
 import GemTemplate from './templates/gem.tpl.js';
 import LoadingTemplate from './templates/loading.tpl.js';
-import { save, unsave, isSaved } from './helpers/save.js';
+import { getFaves, save, unsave, isSaved } from './helpers/save.js';
 import { unescapeHtml } from './helpers/html.js';
+import { setUrlParams, getUrlParam } from './helpers/url.js';
 
 let api = new RubyGemsApi();
 
 function doSearch(query) {
-    document.body.children.results.innerHTML = '';
+    clearGemList();
     document.body.children.results.appendChild(LoadingTemplate());
 
     api.search(query).then((gems) => {
 
-        document.body.children.results.innerHTML = '';
+        clearGemList();
 
-        let newUrl = new URL(document.location);
+        setUrlParams({q: query});
 
-        newUrl.search = new URLSearchParams({q: query});
-
-        history.pushState({}, document.title, newUrl);
-
-        gems.forEach((gem) => {
-            let gemElement = GemTemplate(gem);
-            document.body.children.results.appendChild(gemElement);
-            addGemEventListeners(gemElement);
-        });
+        populateGemList(gems);
     });
 }
 
-let urlParams = new URLSearchParams(window.location.search);
-let searchParam = urlParams.get('q');
-
-if (searchParam) {
-    doSearch(searchParam);
-    document.getElementById('search').children.query.value = searchParam;
+function clearGemList(gems) {
+    return document.body.children.results.innerHTML = '';
 }
 
-document.getElementById('search').addEventListener('submit', (event) => {
+function populateGemList(gems) {
+    return gems.forEach((gem) => {
+        let gemElement = GemTemplate(gem);
+        document.body.children.results.appendChild(gemElement);
+        addGemEventListeners(gemElement);
+    });
+}
+
+let searchParam = getUrlParam('q');
+if (searchParam) {
+    doSearch(searchParam);
+    document.querySelector('.search-input').value = searchParam;
+}
+
+document.querySelector('.search-form').addEventListener('submit', (event) => {
     event.preventDefault();
 
     let queryInput = event.target.children.query;
@@ -45,6 +48,25 @@ document.getElementById('search').addEventListener('submit', (event) => {
 
     return false;
 });
+
+document.querySelector('.faves').addEventListener('click', (event) => {
+    event.preventDefault();
+
+    showFaves();
+
+    return false;
+});
+
+function showFaves() {
+    document.querySelector('.search-input').value = '';
+    setUrlParams({'page': 'faves'});
+
+    clearGemList();
+
+    let faves = getFaves();
+
+    populateGemList(faves);
+}
 
 function addGemEventListeners(gemElement) {
     gemElement.querySelector('[data-saved]').addEventListener('click', (event) => {
