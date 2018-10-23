@@ -4,18 +4,18 @@ import LoadingTemplate from './templates/loading.tpl.js';
 import { getFaves } from './helpers/save.js';
 import { setUrlParams, getUrlParam } from './helpers/url.js';
 
+/**
+ * Perform a new gem search by hitting the API
+ */
 function doSearch(query) {
     clearGemList();
+    setUrlParams({q: query});
     document.body.children.results.appendChild(LoadingTemplate());
 
     let api = new RubyGemsApi();
 
     api.search(query).then((gems) => {
-
         clearGemList();
-
-        setUrlParams({q: query});
-
         populateGemList(gems);
     });
 }
@@ -24,11 +24,31 @@ function clearGemList(gems) {
     return document.body.children.results.innerHTML = '';
 }
 
+/**
+ * Fill the gem list based on JSON data
+ *
+ * @param  An array of gem data taken from the API
+ * @return undefined
+ */
 function populateGemList(gems) {
     return gems.forEach((gem) => {
         let gemElement = new Gem(gem);
         document.body.children.results.appendChild(gemElement);
     });
+}
+
+/**
+ * Display the list of saved Gems
+ */
+function showFaves() {
+    clearGemList();
+    setUrlParams({'page': 'faves'});
+
+    document.querySelector('.search-input').value = '';
+
+    let faves = getFaves();
+
+    populateGemList(faves);
 }
 
 let searchParam = getUrlParam('q');
@@ -54,14 +74,3 @@ document.querySelector('.faves').addEventListener('click', (event) => {
 
     return false;
 });
-
-function showFaves() {
-    document.querySelector('.search-input').value = '';
-    setUrlParams({'page': 'faves'});
-
-    clearGemList();
-
-    let faves = getFaves();
-
-    populateGemList(faves);
-}
