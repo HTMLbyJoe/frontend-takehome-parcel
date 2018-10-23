@@ -19,7 +19,9 @@ function doSearch(query) {
         history.pushState({}, document.title, newUrl);
 
         gems.forEach((gem) => {
-            document.body.children.results.appendChild(GemTemplate(gem));
+            let gemElement = GemTemplate(gem);
+            document.body.children.results.appendChild(gemElement);
+            addGemEventListeners(gemElement);
         });
     });
 }
@@ -41,3 +43,18 @@ document.getElementById('search').addEventListener('submit', (event) => {
 
     return false;
 });
+
+function addGemEventListeners(gemElement) {
+    gemElement.querySelector('[data-saved]').addEventListener('click', (event) => {
+        event.preventDefault();
+
+        let button = event.target;
+        let buttonText = button.querySelector('.text');
+        let saved = !JSON.parse(event.target.dataset.saved);
+
+        button.dataset.saved = saved;
+        buttonText.innerHTML = saved ? 'Saved' : 'Save';
+
+        return false;
+    });
+}

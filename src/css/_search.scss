@@ -14,6 +14,34 @@
         padding: 1rem;
         margin: 1rem 0;
 
+        button {
+            display: block;
+            background: var(--body-bg);
+            color: var(--body-color);
+            border: 0.2rem solid;
+            border-spacing: 0;
+            cursor: pointer;
+            color: initial;
+            font-size: 1rem;
+            margin: 0;
+            padding: 0.3rem 0.5rem;
+
+            svg {
+                max-width: 1rem;
+                transform: translateY(3px);
+                fill: var(--body-color);
+            }
+
+            &[data-saved="true"] {
+                background: var(--body-color);
+                color: var(--body-bg);
+
+                svg {
+                    fill: var(--body-bg);
+                }
+            }
+        }
+
         .name {
             text-overflow: ellipsis;
             overflow: hidden;
